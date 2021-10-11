@@ -1,14 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
 import Nav from '../shared/components/Nav';
 import Modal from '../shared/components/Modal/Modal';
 import AddTask from '../shared/components/AddTask/AddTask';
 
+import { getTasks } from '../shared/localStorage/task';
+
 export default function Home () {
     const [ isAddTaskModalOpen, setIsAddTaskModalOpen ] = useState(false);
     const toggleAddTaskModal = () => {
         setIsAddTaskModalOpen(previousIsAddTaskModalOpen => !previousIsAddTaskModalOpen);
+    }
+
+    const [ tasks, setTasks ] = useState([]);
+    useEffect(() => {
+        setTasks(getTasks());
+    }, typeof localStorage !== 'undefined' ? [localStorage.getItem('tasks')] : []);
+
+
+    const getTagBackgroundColor = (tag) => {
+        if (tag === 'urgent') {
+            return 'background-color-red';
+        } else if (tag === 'chill') {
+            return 'backgroud-color-blue';
+        }
     }
 
     return (
@@ -27,26 +43,34 @@ export default function Home () {
                         placeholder="filter..." />
                 </div>
 
-                <div className="card flex flex-direction-column p-1 b-1-black">
-                    <div className="flex justify-content-between align-items-center">
-                        <div className="text-3">
-                            get groceries
-                        </div>
+                <div className="cards-container">
+                    { tasks.map(task => {
+                        return (
+                            <div
+                                key={ task.ID }
+                                className="card flex flex-direction-column p-1 b-1-black">
+                                <div className="flex justify-content-between align-items-center">
+                                    <div className="text-3">
+                                        { task.title }
+                                    </div>
 
-                        <div className="square background-color-black"></div>
-                    </div>
+                                    <div className="square background-color-black"></div>
+                                </div>
 
-                    <p className="card__text m-0 mb-auto text-2">
-                        1 bread 2 bananas 5 can of beans 1 bag of oranges
-                    </p>
+                                <p className="card__text m-0 mb-auto text-2">
+                                    { task.title }
+                                </p>
 
-                    <div className="flex justify-content-between align-items-center">
-                        <div className="flex justify-content-center align-items-center tag background-color-red">
-                            urgent
-                        </div>
+                                <div className="flex justify-content-between align-items-center">
+                                    <div className={`flex justify-content-center align-items-center tag rounded ${ getTagBackgroundColor(task.tag) }`}>
+                                        { task.tag }
+                                    </div>
 
-                        <div className="square b-1-black"></div>
-                    </div>
+                                    <div className="square b-1-black"></div>
+                                </div>
+                            </div>
+                        );
+                    }) }
                 </div>
 
                 <Modal isOpen={ isAddTaskModalOpen } toggleModal={ toggleAddTaskModal }>
