@@ -40,7 +40,8 @@ export default function Home () {
                 <div className="text-center my-1">
                     <input
                         type="text"
-                        placeholder="filter..." />
+                        placeholder="filter..."
+                        className="filter-input" />
                 </div>
 
                 <div className="cards-container">
