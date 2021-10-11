@@ -27,6 +27,12 @@ const AddTask = ({ toggleModal }) => {
         event.preventDefault();
 
         createTask(task);
+        setTask({
+            title: '',
+            description: '',
+            tag: ''
+        });
+        toggleModal();
     }
 
     return (
@@ -49,6 +55,7 @@ const AddTask = ({ toggleModal }) => {
                     placeholder="title"
                     className="mb-1"
                     onChange={ handleChange }
+                    value={ task.title }
                     id="title" />
                 <label
                     htmlFor="description"
@@ -58,6 +65,7 @@ const AddTask = ({ toggleModal }) => {
                 <textarea
                     className="mb-1"
                     onChange={ handleChange }
+                    value={ task.description }
                     id="description"
                     rows="5"></textarea>
 
@@ -69,6 +77,7 @@ const AddTask = ({ toggleModal }) => {
                         type="radio"
                         name="tags"
                         className="d-none"
+                        checked={ task.tag === "chill" }
                         onChange={ selectTag }
                         id="chill" />
                     <label
@@ -81,6 +90,7 @@ const AddTask = ({ toggleModal }) => {
                         type="radio"
                         name="tags"
                         className="d-none"
+                        checked={ task.tag === "urgent" }
                         onChange={ selectTag }
                         id="urgent" />
                     <label
