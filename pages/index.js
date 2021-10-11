@@ -63,6 +63,7 @@ export default function Home () {
 
     const [ isViewTaskModalOpen, setIsViewTaskModalOpen ] = useState(false);
     const toggleViewTaskModal = () => {
+        setViewTask(null)
         setIsViewTaskModalOpen(previousIsViewTaskModalOpen => !previousIsViewTaskModalOpen);
     }
 
