@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { createTask } from '../../localStorage/task';
+
 const AddTask = () => {
     const [ task, setTask ] = useState({
         title: '',
@@ -21,13 +23,21 @@ const AddTask = () => {
         }));
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        createTask(task);
+    }
+
     return (
         <React.Fragment>
             <h2 className="text-3 mb-1">
                 create task
             </h2>
 
-            <form className="flex flex-direction-column">
+            <form
+                onSubmit={ handleSubmit }
+                className="flex flex-direction-column">
                 <label
                     htmlFor="title"
                     className="text-2 mb-1">
