@@ -16,6 +16,10 @@ body.modal-is-open {
     min-width: 100px;
 }
 
+input[name=tags]:checked + .tag {
+    border: 2px solid #000000;
+}
+
 .button {
     min-height: 40px;
     min-width: 120px;
