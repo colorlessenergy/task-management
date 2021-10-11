@@ -27,6 +27,15 @@ export default function Home () {
         }
     }
 
+    let [ filterInput, setFilterInput ] = useState('');
+    const handleFilterInputChange = (event) => {
+        setFilterInput(event.target.value);
+    }
+
+    const filterTasks = (task) => {
+        return task.title.includes(filterInput) || task.description.includes(filterInput) || task.tag.includes(filterInput);
+    }
+
     return (
         <div>
             <Head>
@@ -41,11 +50,15 @@ export default function Home () {
                     <input
                         type="text"
                         placeholder="filter..."
+                        value={ filterInput }
+                        onChange={ handleFilterInputChange }
                         className="filter-input" />
                 </div>
 
                 <div className="cards-container">
-                    { tasks.map(task => {
+                    { tasks
+                        .filter(filterTasks)
+                        .map(task => {
                         return (
                             <div
                                 key={ task.ID }
@@ -59,7 +72,7 @@ export default function Home () {
                                 </div>
 
                                 <p className="card__text m-0 mb-auto text-2">
-                                    { task.title }
+                                    { task.description }
                                 </p>
 
                                 <div className="flex justify-content-between align-items-center">
