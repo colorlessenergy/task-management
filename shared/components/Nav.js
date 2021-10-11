@@ -5,7 +5,7 @@ import logo from '../../public/logo.png';
 
 const Nav = ({ toggleAddTaskModal }) => {
     return (
-        <nav className="flex justify-content-between mt-1 mx-1">
+        <nav className="flex justify-content-between">
             <Image
                 src={ logo }
                 alt="logo" />
