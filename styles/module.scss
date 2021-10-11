@@ -6,3 +6,7 @@
 
     background-color: $green;
 }
+
+body.modal-is-open {
+  overflow: hidden;
+}
