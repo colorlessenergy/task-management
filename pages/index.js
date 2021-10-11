@@ -35,7 +35,9 @@ export default function Home () {
         return task.title.includes(filterInput) || task.description.includes(filterInput) || task.tag.includes(filterInput);
     }
 
-    const setTaskToDone = (selectedTaskID) => {
+    const setTaskToDone = (event, selectedTaskID) => {
+        event.stopPropagation();
+
         let tasks = JSON.parse(localStorage.getItem('tasks'));
         let taskID = tasks.findIndex(task => task.ID === selectedTaskID);
         tasks[taskID].isDone = !tasks[taskID].isDone;
@@ -104,7 +106,7 @@ export default function Home () {
 
                                     <button
                                         className={`square b-1-black ${ task.isDone === true ? ("background-color-orange") : ("") }`}
-                                        onClick={ () => setTaskToDone(task.ID) }></button>
+                                        onClick={ (event) => setTaskToDone(event, task.ID) }></button>
                                 </div>
                             </div>
                         );
