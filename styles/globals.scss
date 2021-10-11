@@ -1,3 +1,10 @@
 @use 'base.scss';
 @use 'utilities.scss';
 @use 'module.scss';
+@use 'variables.scss' as *;
+
+@media (min-width: 1600px) {
+    .container {
+        margin: $space-1 auto 0 auto;
+    }
+}

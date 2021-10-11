@@ -18,7 +18,7 @@ export default function Home () {
                 <meta name="description" content="task management" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div>
+            <div className="container">
                 <Nav toggleAddTaskModal={ toggleAddTaskModal } />
 
                 <div className="text-center my-1">
