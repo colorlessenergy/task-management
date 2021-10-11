@@ -6,10 +6,9 @@ import Modal from '../shared/components/Modal/Modal';
 import AddTask from '../shared/components/AddTask/AddTask';
 
 export default function Home () {
-    const [ isAddTaskOpen, setIsAddTaskOpen ] = useState(true);
-
+    const [ isAddTaskModalOpen, setIsAddTaskModalOpen ] = useState(false);
     const toggleAddTaskModal = () => {
-        setIsAddTaskOpen(previousIsAddTaskOpen => !previousIsAddTaskOpen);
+        setIsAddTaskModalOpen(previousIsAddTaskModalOpen => !previousIsAddTaskModalOpen);
     }
 
     return (
@@ -22,7 +21,7 @@ export default function Home () {
             <div>
                 <Nav toggleAddTaskModal={ toggleAddTaskModal } />
 
-                <Modal isOpen={ isAddTaskOpen } toggleModal={ toggleAddTaskModal }>
+                <Modal isOpen={ isAddTaskModalOpen } toggleModal={ toggleAddTaskModal }>
                     <AddTask toggleModal={ toggleAddTaskModal } />
                 </Modal>
             </div>
