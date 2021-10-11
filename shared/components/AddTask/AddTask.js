@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState } from 'react';
 
 const AddTask = () => {
+    const [ task, setTask ] = useState({
+        title: '',
+        description: '',
+        tag: ''
+    });
+
+    const handleChange = (event) => {
+        setTask(previousTask => ({
+            ...previousTask,
+            [ event.target.id ]: event.target.value
+        }));
+    }
+
+    const selectTag = (event) => {
+        setTask(previousTask => ({
+            ...previousTask,
+            tag: event.target.id
+        }));
+    }
+
     return (
         <React.Fragment>
             <h2 className="text-3 mb-1">
@@ -18,6 +38,7 @@ const AddTask = () => {
                     autoComplete="off"
                     placeholder="title"
                     className="mb-1"
+                    onChange={ handleChange }
                     id="title" />
                 <label
                     htmlFor="description"
@@ -26,6 +47,7 @@ const AddTask = () => {
                 </label>                        
                 <textarea
                     className="mb-1"
+                    onChange={ handleChange }
                     id="description"
                     rows="5"></textarea>
 
@@ -37,6 +59,7 @@ const AddTask = () => {
                         type="radio"
                         name="tags"
                         className="d-none"
+                        onChange={ selectTag }
                         id="chill" />
                     <label
                         htmlFor="chill"
@@ -48,6 +71,7 @@ const AddTask = () => {
                         type="radio"
                         name="tags"
                         className="d-none"
+                        onChange={ selectTag }
                         id="urgent" />
                     <label
                         htmlFor="urgent"
