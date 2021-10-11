@@ -7,7 +7,7 @@ export const getTasks = () => {
         localStorage.setItem('ID', JSON.stringify(0));
     }
 
-    return localStorage.getItem('tasks');
+    return JSON.parse(localStorage.getItem('tasks'));
 }
 
 export const createTask = (task) => {
