@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { createTask } from '../../localStorage/task';
+import { createTask, setTask as setTaskInLocalStorage } from '../../localStorage/task';
 
-const AddTask = ({ toggleModal }) => {
+const AddOrEditTask = ({ title, submitButtonText, toggleModal, selectedTask = null }) => {
+    useEffect(() => {
+        if (selectedTask) {
+            setTask(selectedTask)
+        }
+    }, []);
+
     const [ task, setTask ] = useState({
         title: '',
         description: '',
@@ -51,7 +57,11 @@ const AddTask = ({ toggleModal }) => {
             return setFormValidation(formValidation);
         }
 
-        createTask(task);
+        if (submitButtonText === 'create') {
+            createTask(task);
+        } else if (submitButtonText === 'edit') {
+            setTaskInLocalStorage(task);
+        }
         setTask({
             title: '',
             description: '',
@@ -63,13 +73,15 @@ const AddTask = ({ toggleModal }) => {
             description: '',
             tag: ''
         });
-        toggleModal();
+        if (submitButtonText === 'edit') {
+            toggleModal(task);
+        }
     }
 
     return (
         <React.Fragment>
             <h2 className="text-3 mb-1">
-                create task
+                { title } 
             </h2>
 
             <form
@@ -155,11 +167,11 @@ const AddTask = ({ toggleModal }) => {
                         type="button"
                         onClick={ toggleModal }
                         className="button background-color-pink">cancel</button>
-                    <button className="button background-color-green">create</button>
+                    <button className="button background-color-green">{ submitButtonText }</button>
                 </div>
             </form>
         </React.Fragment>
     );
 }
 
-export default AddTask;
+export default AddOrEditTask;
