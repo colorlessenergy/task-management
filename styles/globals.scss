@@ -3,6 +3,33 @@
 @use 'module.scss';
 @use 'variables.scss' as *;
 
+@media (min-width: 700px) {
+    .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .card {
+        margin-bottom: 10px;
+        width: 49%;
+    }
+}
+
+@media (min-width: 1000px) {
+    .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: unset;
+    }
+
+    .card {
+        margin-right: 1vw;
+        margin-bottom: 1vw;
+        width: 32%;
+    }
+}
+
 @media (min-width: 1600px) {
     .container {
         margin: $space-1 auto 0 auto;
