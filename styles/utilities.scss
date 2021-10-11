@@ -102,6 +102,10 @@
     background-color: $blue;
 }
 
+.background-color-orange {
+    background-color: $orange;
+}
+
 .background-color-black {
     background-color: #000000;
 }
@@ -116,4 +120,12 @@
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.opacity-5 {
+    opacity: 0.5;
+}
+
+.transition-3-ease-in-out {
+    transition: 0.3s all ease-in-out;
 }
