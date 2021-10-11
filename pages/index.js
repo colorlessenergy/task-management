@@ -7,7 +7,7 @@ import Modal from '../shared/components/Modal/Modal';
 export default function Home () {
     const [ isAddTaskOpen, setIsAddTaskOpen ] = useState(true);
 
-    const toggleIsAddTaskModal = () => {
+    const toggleAddTaskModal = () => {
         setIsAddTaskOpen(previousIsAddTaskOpen => !previousIsAddTaskOpen);
     }
 
@@ -19,9 +19,9 @@ export default function Home () {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div>
-                <Nav />
+                <Nav toggleAddTaskModal={ toggleAddTaskModal } />
 
-                <Modal isOpen={ isAddTaskOpen } toggleModal={ toggleIsAddTaskModal }>
+                <Modal isOpen={ isAddTaskOpen } toggleModal={ toggleAddTaskModal }>
                     <h2 className="text-3 mb-1">
                         create task
                     </h2>
