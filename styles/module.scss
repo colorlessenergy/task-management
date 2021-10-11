@@ -1,0 +1,8 @@
+@use 'variables.scss' as *;
+
+.square {
+    height: 30px;
+    width: 30px;
+
+    background-color: $green;
+}
