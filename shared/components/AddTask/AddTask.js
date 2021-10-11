@@ -6,7 +6,8 @@ const AddTask = ({ toggleModal }) => {
     const [ task, setTask ] = useState({
         title: '',
         description: '',
-        tag: ''
+        tag: '',
+        isDone: false
     });
 
     const handleChange = (event) => {
@@ -54,7 +55,8 @@ const AddTask = ({ toggleModal }) => {
         setTask({
             title: '',
             description: '',
-            tag: ''
+            tag: '',
+            isDone: false
         });
         setFormValidation({
             title: '',

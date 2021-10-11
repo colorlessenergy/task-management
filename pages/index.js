@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import Head from 'next/head';
 
 import Nav from '../shared/components/Nav';
 import Modal from '../shared/components/Modal/Modal';
 import AddTask from '../shared/components/AddTask/AddTask';
 
-import { getTasks } from '../shared/localStorage/task';
+import { getTasks, setTask } from '../shared/localStorage/task';
 
 export default function Home () {
     const [ isAddTaskModalOpen, setIsAddTaskModalOpen ] = useState(false);
@@ -18,12 +18,11 @@ export default function Home () {
         setTasks(getTasks());
     }, typeof localStorage !== 'undefined' ? [localStorage.getItem('tasks')] : []);
 
-
     const getTagBackgroundColor = (tag) => {
         if (tag === 'urgent') {
             return 'background-color-red';
         } else if (tag === 'chill') {
-            return 'backgroud-color-blue';
+            return 'background-color-blue';
         }
     }
 
@@ -35,6 +34,17 @@ export default function Home () {
     const filterTasks = (task) => {
         return task.title.includes(filterInput) || task.description.includes(filterInput) || task.tag.includes(filterInput);
     }
+
+    const setTaskToDone = (selectedTaskID) => {
+        let tasks = JSON.parse(localStorage.getItem('tasks'));
+        let taskID = tasks.findIndex(task => task.ID === selectedTaskID);
+        tasks[taskID].isDone = !tasks[taskID].isDone;
+
+        setTask(tasks[taskID]);
+        forceUpdate();
+    }
+
+    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
     return (
         <div>
@@ -62,7 +72,7 @@ export default function Home () {
                         return (
                             <div
                                 key={ task.ID }
-                                className="card flex flex-direction-column p-1 b-1-black">
+                                className={`card flex flex-direction-column p-1 b-1-black transition-3-ease-in-out ${ task.isDone ? ("opacity-5") : ("") }`}>
                                 <div className="flex justify-content-between align-items-center">
                                     <div className="text-3">
                                         { task.title }
@@ -80,7 +90,9 @@ export default function Home () {
                                         { task.tag }
                                     </div>
 
-                                    <div className="square b-1-black"></div>
+                                    <button
+                                        className={`square b-1-black ${ task.isDone === true ? ("background-color-orange") : ("") }`}
+                                        onClick={ () => setTaskToDone(task.ID) }></button>
                                 </div>
                             </div>
                         );
