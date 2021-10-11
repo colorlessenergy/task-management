@@ -12,7 +12,7 @@ const Nav = ({ toggleAddTaskModal }) => {
 
             <button
                 onClick={ toggleAddTaskModal }
-                className="square flex justify-content-center align-items-center">
+                className="square background-color-green flex justify-content-center align-items-center">
                 +
             </button>
         </nav>
