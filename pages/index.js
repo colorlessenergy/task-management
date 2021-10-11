@@ -46,6 +46,17 @@ export default function Home () {
 
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
+    const [ isViewTaskModalOpen, setIsViewTaskModalOpen ] = useState(true);
+    const toggleViewTaskModal = () => {
+        setIsViewTaskModalOpen(previousIsViewTaskModalOpen => !previousIsViewTaskModalOpen);
+    }
+
+    const [ viewTask, setViewTask ] = useState(null)
+    const openViewTaskModal = (task) => {
+        setViewTask(task);
+        setIsViewTaskModalOpen(true);
+    }
+
     return (
         <div>
             <Head>
@@ -72,6 +83,7 @@ export default function Home () {
                         return (
                             <div
                                 key={ task.ID }
+                                onClick={ () => openViewTaskModal(task) }
                                 className={`card flex flex-direction-column p-1 b-1-black transition-3-ease-in-out ${ task.isDone ? ("opacity-5") : ("") }`}>
                                 <div className="flex justify-content-between align-items-center">
                                     <div className="text-3">
@@ -102,6 +114,29 @@ export default function Home () {
                 <Modal isOpen={ isAddTaskModalOpen } toggleModal={ toggleAddTaskModal }>
                     <AddTask toggleModal={ toggleAddTaskModal } />
                 </Modal>
+
+                { viewTask ? (
+                    <Modal isOpen={ isViewTaskModalOpen } toggleModal={ toggleViewTaskModal }>
+                        <div className="text-3">
+                            { viewTask.title }
+                        </div>
+
+                        <p className="card__text m-0 mb-2 text-2">
+                            { viewTask.description }
+                        </p>
+
+                        <div className="flex align-items-center">
+                            <div className={`flex justify-content-center align-items-center tag rounded ${ getTagBackgroundColor(viewTask.tag) }`}>
+                                { viewTask.tag }
+                            </div>
+                        </div>
+
+                        <div className="flex justify-content-between">
+                            <button className="button background-color-pink">delete</button>
+                            <button className="button background-color-green">edit</button>
+                        </div>
+                    </Modal>
+                ) : (null) }
             </div>
         </div>
     );
