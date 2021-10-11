@@ -24,3 +24,11 @@ export const createTask = (task) => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
     localStorage.setItem('ID', JSON.stringify(ID));
 }
+
+export const setTask = (updatedTask) => {
+    let tasks = JSON.parse(localStorage.getItem('tasks'));
+    let taskID = tasks.findIndex(task => task.ID === updatedTask.ID);
+    tasks[taskID] = updatedTask;
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
