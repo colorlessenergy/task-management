@@ -127,7 +127,7 @@ export default function Home () {
                             { viewTask.description }
                         </p>
 
-                        <div className="flex align-items-center">
+                        <div className="flex align-items-center mb-auto">
                             <div className={`flex justify-content-center align-items-center tag rounded ${ getTagBackgroundColor(viewTask.tag) }`}>
                                 { viewTask.tag }
                             </div>
