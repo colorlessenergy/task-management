@@ -21,6 +21,12 @@ export default function Home () {
             <div>
                 <Nav toggleAddTaskModal={ toggleAddTaskModal } />
 
+                <div className="text-center my-1">
+                    <input
+                        type="text"
+                        placeholder="filter..." />
+                </div>
+
                 <Modal isOpen={ isAddTaskModalOpen } toggleModal={ toggleAddTaskModal }>
                     <AddTask toggleModal={ toggleAddTaskModal } />
                 </Modal>
