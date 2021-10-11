@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import Nav from '../shared/components/Nav';
 import Modal from '../shared/components/Modal/Modal';
-import AddTask from '../shared/components/AddTask/AddTask';
+import AddOrEditTask from '../shared/components/AddOrEditTask/AddOrEditTask';
 
 import { getTasks, setTask } from '../shared/localStorage/task';
 
@@ -11,6 +11,19 @@ export default function Home () {
     const [ isAddTaskModalOpen, setIsAddTaskModalOpen ] = useState(false);
     const toggleAddTaskModal = () => {
         setIsAddTaskModalOpen(previousIsAddTaskModalOpen => !previousIsAddTaskModalOpen);
+    }
+
+    const [ isEditTaskModalOpen, setIsEditTaskModalOpen ] = useState(true);
+    const toggleEditTaskModal = (task) => {
+        setViewTask(task)
+        setEditTask(null);
+        setIsEditTaskModalOpen(previousIsEditTaskModalOpen => !previousIsEditTaskModalOpen);
+    }
+
+    const [ editTask, setEditTask ] = useState(null)
+    const openEditTaskModal = (task) => {
+        setEditTask(task);
+        setIsEditTaskModalOpen(true);
     }
 
     const [ tasks, setTasks ] = useState([]);
@@ -48,7 +61,7 @@ export default function Home () {
 
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
-    const [ isViewTaskModalOpen, setIsViewTaskModalOpen ] = useState(true);
+    const [ isViewTaskModalOpen, setIsViewTaskModalOpen ] = useState(false);
     const toggleViewTaskModal = () => {
         setIsViewTaskModalOpen(previousIsViewTaskModalOpen => !previousIsViewTaskModalOpen);
     }
@@ -113,9 +126,15 @@ export default function Home () {
                     }) }
                 </div>
 
-                <Modal isOpen={ isAddTaskModalOpen } toggleModal={ toggleAddTaskModal }>
-                    <AddTask toggleModal={ toggleAddTaskModal } />
-                </Modal>
+                { isAddTaskModalOpen ? (
+                    <Modal isOpen={ isAddTaskModalOpen } toggleModal={ toggleAddTaskModal }>
+                        <AddOrEditTask
+                            title="create task"
+                            submitButtonText="create"
+                            toggleModal={ toggleAddTaskModal } />
+                    </Modal>
+                ) : (null) }
+
 
                 { viewTask ? (
                     <Modal isOpen={ isViewTaskModalOpen } toggleModal={ toggleViewTaskModal }>
@@ -135,8 +154,20 @@ export default function Home () {
 
                         <div className="flex justify-content-between">
                             <button className="button background-color-pink">delete</button>
-                            <button className="button background-color-green">edit</button>
+                            <button
+                                onClick={ () => openEditTaskModal(viewTask) }
+                                className="button background-color-green">edit</button>
                         </div>
+                    </Modal>
+                ) : (null) }
+
+                { editTask ? (
+                    <Modal isOpen={ isEditTaskModalOpen } toggleModal={ toggleEditTaskModal }>
+                        <AddOrEditTask
+                            title="edit task"
+                            submitButtonText="edit"
+                            selectedTask={ editTask }
+                            toggleModal={ toggleEditTaskModal } />
                     </Modal>
                 ) : (null) }
             </div>
