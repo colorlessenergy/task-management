@@ -23,7 +23,7 @@ export default function Home () {
                 <Nav toggleAddTaskModal={ toggleAddTaskModal } />
 
                 <Modal isOpen={ isAddTaskOpen } toggleModal={ toggleAddTaskModal }>
-                    <AddTask />
+                    <AddTask toggleModal={ toggleAddTaskModal } />
                 </Modal>
             </div>
         </div>

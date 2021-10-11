@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { createTask } from '../../localStorage/task';
 
-const AddTask = () => {
+const AddTask = ({ toggleModal }) => {
     const [ task, setTask ] = useState({
         title: '',
         description: '',
@@ -93,6 +93,7 @@ const AddTask = () => {
                 <div className="flex justify-content-between">
                     <button
                         type="button"
+                        onClick={ toggleModal }
                         className="button background-color-pink">cancel</button>
                     <button className="button background-color-green">create</button>
                 </div>
