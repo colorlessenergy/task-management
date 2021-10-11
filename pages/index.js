@@ -101,12 +101,8 @@ export default function Home () {
                                 key={ task.ID }
                                 onClick={ () => openViewTaskModal(task) }
                                 className={`card flex flex-direction-column p-1 b-1-black transition-3-ease-in-out ${ task.isDone ? ("opacity-5") : ("") }`}>
-                                <div className="flex justify-content-between align-items-center">
-                                    <div className="text-3">
-                                        { task.title }
-                                    </div>
-
-                                    <div className="square background-color-black"></div>
+                                <div className="text-3">
+                                    { task.title }
                                 </div>
 
                                 <p className="card__text m-0 mb-auto text-2">
