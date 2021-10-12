@@ -101,6 +101,16 @@ export default function Home () {
                     { tasks
                         .filter(filterTasks)
                         .map(task => {
+                        let taskDescription = task.description;
+                        if (taskDescription.length > 202) {
+                            let splitTaskDescription = taskDescription.split('');
+                            splitTaskDescription = splitTaskDescription.splice(0, 202);
+                            splitTaskDescription = splitTaskDescription.join('');
+                            splitTaskDescription += '...';
+
+                            taskDescription = splitTaskDescription;
+                        }
+
                         return (
                             <div
                                 key={ task.ID }
@@ -111,10 +121,10 @@ export default function Home () {
                                 </div>
 
                                 <p className="card__text m-0 mb-auto text-2">
-                                    { task.description }
+                                    { taskDescription }
                                 </p>
 
-                                <div className="flex justify-content-between align-items-center">
+                                <div className="flex justify-content-between align-items-center mt-1">
                                     <div className={`flex justify-content-center align-items-center tag rounded ${ getTagBackgroundColor(task.tag) }`}>
                                         { task.tag }
                                     </div>
@@ -154,7 +164,7 @@ export default function Home () {
                             </div>
                         </div>
 
-                        <div className="flex justify-content-between">
+                        <div className="flex justify-content-between mt-1">
                             <button
                                 onClick={ () => deleteTask(viewTask.ID) }
                                 className="button background-color-pink">delete</button>
