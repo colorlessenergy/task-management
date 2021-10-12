@@ -5,7 +5,7 @@ import Nav from '../shared/components/Nav';
 import Modal from '../shared/components/Modal/Modal';
 import AddOrEditTask from '../shared/components/AddOrEditTask/AddOrEditTask';
 
-import { getTasks, setTask } from '../shared/localStorage/task';
+import { getTasks, setTask, deleteTask as deleteTaskFromLocalStorage } from '../shared/localStorage/task';
 
 export default function Home () {
     const [ isAddTaskModalOpen, setIsAddTaskModalOpen ] = useState(false);
@@ -71,6 +71,11 @@ export default function Home () {
     const openViewTaskModal = (task) => {
         setViewTask(task);
         setIsViewTaskModalOpen(true);
+    }
+
+    const deleteTask = (taskID) => {
+        deleteTaskFromLocalStorage(taskID);
+        toggleViewTaskModal();
     }
 
     return (
@@ -150,7 +155,9 @@ export default function Home () {
                         </div>
 
                         <div className="flex justify-content-between">
-                            <button className="button background-color-pink">delete</button>
+                            <button
+                                onClick={ () => deleteTask(viewTask.ID) }
+                                className="button background-color-pink">delete</button>
                             <button
                                 onClick={ () => openEditTaskModal(viewTask) }
                                 className="button background-color-green">edit</button>
