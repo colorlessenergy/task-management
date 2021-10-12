@@ -15,7 +15,9 @@ export default function Home () {
 
     const [ isEditTaskModalOpen, setIsEditTaskModalOpen ] = useState(true);
     const toggleEditTaskModal = (task) => {
-        setViewTask(task)
+        if (task) {
+            setViewTask(task)
+        }
         setEditTask(null);
         setIsEditTaskModalOpen(previousIsEditTaskModalOpen => !previousIsEditTaskModalOpen);
     }

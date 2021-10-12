@@ -167,7 +167,7 @@ const AddOrEditTask = ({ title, submitButtonText, toggleModal, selectedTask = nu
                 <div className="flex justify-content-between">
                     <button
                         type="button"
-                        onClick={ toggleModal }
+                        onClick={ () => toggleModal() }
                         className="button background-color-pink">cancel</button>
                     <button className="button background-color-green">{ submitButtonText }</button>
                 </div>
