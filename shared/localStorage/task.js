@@ -27,8 +27,16 @@ export const createTask = (task) => {
 
 export const setTask = (updatedTask) => {
     let tasks = JSON.parse(localStorage.getItem('tasks'));
-    let taskID = tasks.findIndex(task => task.ID === updatedTask.ID);
-    tasks[taskID] = updatedTask;
+    let taskIndex = tasks.findIndex(task => task.ID === updatedTask.ID);
+    tasks[taskIndex] = updatedTask;
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+export const deleteTask = (taskID) => {
+    let tasks = JSON.parse(localStorage.getItem('tasks'));
+    let taskIndex = tasks.findIndex(task => task.ID === taskID);
+    tasks.splice(taskIndex, 1)
 
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
