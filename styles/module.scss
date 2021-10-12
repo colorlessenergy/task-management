@@ -1,0 +1,43 @@
+@use 'variables.scss' as *;
+
+.container {
+    margin: $space-1 $space-1 0 $space-1;
+    max-width: 1600px;
+}
+
+.square {
+    height: 30px;
+    width: 30px;
+}
+
+body.modal-is-open {
+  overflow: hidden;
+}
+
+.tag {
+    min-height: 30px;
+    min-width: 100px;
+}
+
+input[name=tags]:checked + .tag {
+    border: 2px solid #000000;
+}
+
+.button {
+    min-height: 40px;
+    min-width: 120px;
+}
+
+.card {
+    margin-bottom: 10px;
+    min-height: 200px;
+    width: 100%;
+}
+
+.card__text {
+    margin-top: 6px;
+}
+
+.filter-input {
+    width: 70%;
+}
