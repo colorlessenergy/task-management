@@ -105,7 +105,7 @@ export default function Home () {
                             <div
                                 key={ task.ID }
                                 onClick={ () => openViewTaskModal(task) }
-                                className={`card flex flex-direction-column p-1 b-1-black transition-3-ease-in-out ${ task.isDone ? ("opacity-5") : ("") }`}>
+                                className={`card flex flex-direction-column p-1 b-1-black cursor-pointer transition-3-ease-in-out ${ task.isDone ? ("opacity-5") : ("") }`}>
                                 <div className="text-3">
                                     { task.title }
                                 </div>
