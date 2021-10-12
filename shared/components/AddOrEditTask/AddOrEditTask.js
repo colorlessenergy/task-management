@@ -75,6 +75,8 @@ const AddOrEditTask = ({ title, submitButtonText, toggleModal, selectedTask = nu
         });
         if (submitButtonText === 'edit') {
             toggleModal(task);
+        } else if (submitButtonText === 'create') {
+            toggleModal();
         }
     }
 
