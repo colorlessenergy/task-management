@@ -1,10 +1,17 @@
 export const getTasks = () => {
-    if (!localStorage.getItem('tasks')) {
-        localStorage.setItem('tasks', JSON.stringify([]));
-    }
-
     if (!localStorage.getItem('ID')) {
         localStorage.setItem('ID', JSON.stringify(0));
+    }
+
+    if (!localStorage.getItem('tasks')) {
+        localStorage.setItem('tasks', JSON.stringify([]));
+
+        createTask({
+            title: 'get groceries',
+            description: '2 bananas, 5 can of beans and 1 bag of oranges',
+            tag: 'chill',
+            isDone: false
+        });
     }
 
     return JSON.parse(localStorage.getItem('tasks'));
